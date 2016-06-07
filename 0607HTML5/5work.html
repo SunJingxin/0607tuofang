@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		.box{
+			width:170px;
+			height:200px;
+			background-color:red;
+			margin: 10px;
+			float:left;
+			border: 1px solid #666666;
+		}
+		.box img{
+			width: 170px;
+			height: 200px;
+		}      	
+		#container{
+			width:550px;
+			height: 300px;			
+			margin: 10px;
+			clear:left;
+			border: 1px solid black;					
+		}				
+	</style>
+	<body>
+     <div class="box" id="box1"  draggable="true">
+     	<img src="img/1.jpg" draggable="true" id="img1"/>
+     </div>
+     <div class="box" id="box2" draggable="true">
+     	<img src="img/2.jpg" draggable="true" id="img2"/>
+     </div>
+     <div class="box" id="box3" draggable="true">
+     	<img src="img/3.png" draggable="true" id="img3"/>
+     </div>
+     <div class="box" id="box4" draggable="true">
+     	<img src="img/4.png" draggable="true" id="img4"/>
+     </div>    
+     <div id="container"></div>        
+<script>
+	var box1=document.getElementById("box1");
+	var box2=document.getElementById("box2");
+	var box3=document.getElementById("box3");
+	var box4=document.getElementById("box4");
+	var container=document.getElementById("container");	
+	var container1=document.getElementById("container1");	
+  box1.ondragstart=function(ev){
+  	ev.dataTransfer.setData("Text","苹果5S"); 
+  }
+  box2.ondragstart=function(ev){
+	ev.dataTransfer.setData("Text","三星S6");	
+  }
+  box3.ondragstart=function(ev){
+	ev.dataTransfer.setData("Text","诺基亚S3");
+  }
+  box4.ondragstart=function(ev){
+	ev.dataTransfer.setData("Text","苹果6S");
+  }
+  container.ondragover=function(ev){
+  	ev.preventDefault();
+  }
+  var countA=0,countB=0,countC=0,countD=0;
+  var countA1=0,countB1=0,countC1=0,countD1=0;
+  var countZongji=0;
+  container.ondrop=function(ev){
+  	ev.preventDefault();
+  	var  data=ev.dataTransfer.getData("Text");	
+     	 selecteList(data);
+//   	 lsatDiv();      
+  }
+//-------------------------------------------------------------------------------------------
+    //全局的
+     var count=0;
+     //创建一个大DIV
+	 var createDiv=function(){
+	 	count++;	 
+	 var createDiv=document.createElement("div");
+	   createDiv.className="newDiv"+count;
+	   createDiv.style.width="550px";
+	   createDiv.style.height="32px";
+	   createDiv.style.borderBottom="1px dotted #666666";	
+	   createDiv.style.backgroundColor="#f4f4f4";
+	   container.appendChild(createDiv);	
+	   
+	}	    
+	//在新建DIV里面创建3个小DIV
+	var createSDiv=function(){
+  	  var newDiv=document.getElementsByClassName("newDiv"+count)[0]; 
+	   var div1=document.createElement("div");
+	       div1.className="newDiv-div1"+count;
+	   var div2=document.createElement("div");
+	       div2.className="newDiv-div2"+count;
+	   var div3=document.createElement("div");	
+	       div3.className="newDiv-div3"+count;
+	   div1.style.width="200px";
+	   div1.style.height="32px";
+	   div1.style.lineHeight="32px";
+	   div1.style.float="left";
+	   div2.style.width="200px";
+	   div2.style.height="32px";
+	   div2.style.lineHeight="32px";
+	   div2.style.float="left";
+	   div3.style.width="150px";
+	   div3.style.height="32px";
+	   div3.style.lineHeight="32px";
+	   div3.style.float="left";	
+	   newDiv.appendChild(div1);
+	   newDiv.appendChild(div2);
+	   newDiv.appendChild(div3);
+//	   console.log(newDiv)
+	}	
+   // 修改小DIV的值
+	var getSDiv=function(count1,num){	   
+	   var div1=document.getElementsByClassName("newDiv-div1"+count1)[0];
+	   var div2=document.getElementsByClassName("newDiv-div2"+count1)[0];
+	   var div3=document.getElementsByClassName("newDiv-div3"+count1)[0];
+	   if(num==1){
+	   	div1.innerHTML=countA;
+	    div2.innerHTML="苹果5S";
+	    var a=4400;
+	    div3.innerHTML="$"+a*countA;	  	  
+	    console.log(countA);	  
+	   }  	
+	   if(num==2){
+	   	div1.innerHTML=countB;
+	    div2.innerHTML="三星S6";
+	    var a=5000;
+	    div3.innerHTML="$"+a*countB;	  	  
+	    console.log(countB);	  
+	   }
+	   if(num==3){
+	   	div1.innerHTML=countC;
+	    div2.innerHTML="诺基亚S3";
+	    var a=1000;
+	    div3.innerHTML="$"+a*countC;	  	  
+	    console.log(countC);	  
+	   }
+	   if(num==4){
+	   	div1.innerHTML=countD;
+	    div2.innerHTML="苹果6S";
+	    var a=2000;
+	    div3.innerHTML="$"+a*countD;	  	  
+	    console.log(countD);	  
+	   }   
+	}
+  var selecteList=function(data){    	
+  	if(data=="苹果5S"){ 		
+  	   countA++;
+  	   if(countA<=1){   	   
+  	   createDiv(); 
+  	   countA1=count;
+	   createSDiv();		   
+	   getSDiv(countA1,1);
+  	   } 
+  	   else{
+  	    getSDiv(countA1,1);
+  	   }  	  
+  	  console.log(count)
+  	  console.log("111111111111111111111111111111111111111")
+  	 }
+	if(data=="三星S6"){
+	   countB++;
+  	   if(countB<=1){  	  
+  	   createDiv(); 
+  	   countB1=count;
+	   createSDiv();		   
+	    getSDiv(countB1,2);
+  	   } 
+  	   else{
+  	    getSDiv(countB1,2)
+  	   }
+  	  console.log(count)
+  	  console.log("22222222222222222222222222222222222222222222")
+	}
+	if(data=="诺基亚S3"){
+		 countC++;
+  	   if(countC<=1){
+  	   createDiv(); 
+  	   countC1=count;
+	   createSDiv();		   
+	   getSDiv(countC1,3);
+  	   } 
+  	   else{
+  	    getSDiv(countC1,3)
+  	   }
+  	  console.log(count)
+  	  console.log("3333333333333333333333333333333333333333")
+	}
+	if(data=="苹果6S"){
+		 countD++;
+  	   if(countD<=1){
+  	   createDiv(); 
+  	   countD1=count;
+	   createSDiv();		   
+	   getSDiv(countD1,4);
+  	   } 
+  	  else{
+  	   getSDiv(countD1,4)
+  	  }
+  	  console.log(count)
+  	  console.log("44444444444444444444444444444444444444444")
+	}
+	
+  }
+  var lsatDiv=function(){ 
+      if(countZongji==0){
+      	 countZongji++;
+      	 var countZong=lsatDivStyle();         
+      }	 
+      else{
+      	var countZong=document.getElementsByClassName(countZong)[0]
+      }
+}
+ function lsatDivStyle(){
+      var countZong=document.createElement("div");
+      	  countZong.className="countZong";
+          countZong.style.marginTop="6px";
+          countZong.style.marginLeft="450px";
+          countZong.style.color="#666666";
+          countZong.style.fontSize="18px";
+          container1.appendChild(countZong);  
+          countZong.innerHTML="asdasd";
+          console.log(count);               
+ }
+ 
+</script>
+	</body>
+</html>

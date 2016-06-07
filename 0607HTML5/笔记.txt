@@ -1,0 +1,21 @@
+-----------------------------
+input file 一次性上传一个文件
+  属性 上传多个文件 multiple="multiple"
+FileList对象    所有的需要上传的文件
+文件存储在表单对象的files属性里
+------------------------------
+Blob对象 二进制对象
+------------------------------
+File对象单独的
+即
+fileAarr.files[0]
+每个file对象有type(文件类型)我name(文件名字)
+------------------------------
+FileReader 接口：
+  (1) readAsBinaryString(Blob blob);
+  (2) readAsText(Blob blob,optionalDOMString encoding);
+  (3) readAsDataURL(Blob blob);
+------------------------------
+七个拖放时间
+3个在拖放元素
+4个在目标元素

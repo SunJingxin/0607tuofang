@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form action="" method="post">
+			<input type="file" id="fileArr" multiple="multiple"/>
+			<input type="button" value="提交" id="btn"/>
+		</form>
+		<div id="showDiv">			
+		</div>
+	<script>
+window.onload=function(){
+var fileArr=document.getElementById("fileArr");
+var btn=document.getElementById("btn");
+var showDiv=document.getElementById("showDiv")
+btn.onclick=function(){
+for(var i=0;i<fileArr.files.length;i++){
+//fileArr.files[i];
+//fileReader讲文件的内容读取到网页上
+//实例化一个对象 让对象来做具体的读取工作
+
+var reader=new FileReader();
+//reader.readAsText(fileArr.files[i],"utf-8")
+//reader.readAsBinaryString(fileArr.files[i])
+reader.readAsDataURL(fileArr.files[i])
+//读取的文件的内容存储在对象的result 属性里面
+reader.onload=function(){
+ var DataUrl=this.result;
+ showDiv.innerHTML+="<img src='"+DataUrl+"' />"
+//showDiv.innerHTML=this.result;
+}
+}
+}
+}
+	</script>
+	</body>
+</html>

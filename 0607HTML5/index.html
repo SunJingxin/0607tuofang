@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.item {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				margin: 10px;
+				float: left;
+			}
+			
+			#targetDiv {
+				width: 400px;
+				height: 400px;
+				border: 1px solid #666666;
+				clear: left;
+				margin: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--
+	实现拖放第一步
+	1，设置 draggable="ture"
+-->
+		<div class="item" id="item1" draggable="true"></div>
+		<div class="item" id="item2" draggable="true"></div>
+		<div class="item" id="item3" draggable="true"></div>
+		<div id="targetDiv">
+			<!--html 元素默认不允许拖放
+	img 定义了href属性的a标签除外
+-->
+
+		</div>
+		<script>
+			var items = document.getElementsByClassName("item");
+			var targetDiv = document.getElementById("targetDiv")
+			for (var i = 0; i < items.length; i++) {
+				//拖放元素处监听的三个
+				items[i].ondragstart = function(ev) {
+//					ev.dataTransfer.setData("Text", ev.target.id);
+					console.log("你被拖动了");
+				}
+				items[i].ondrag = function() {
+					console.log("ondrag");
+				}
+				items[i].ondragend = function() {
+					console.log("ondragend");
+				}
+			}
+			//在目标元素触发  
+			//一进入就触发
+			targetDiv.ondragenter = function() {
+					console.log("ondragenter")
+				}
+				//在经过目标元素时
+			targetDiv.ondragover = function(ev) {
+//					ev.preventDefault();
+					console.log("ondragover")
+				}
+				//离开目标元素
+			targetDiv.ondragleave = function() {
+					console.log("ondragleave")
+				}
+				//放
+			targetDiv.ondrop = function(ev) {
+				////	 ev.preventDefault();
+				//	var data=ev.dataTransfer.getData("Text");
+				//	ev.target.appendChild(document.getElementById(data));
+			}
+		</script>
+	</body>
+
+</html>

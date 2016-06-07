@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.item {
+				width: 100px;
+				height: 100px;
+				background-color: red;
+				margin: 10px;
+				float: left;
+			}
+			.item img{
+				width: 10px;
+				height: 10px;
+			}
+			#targetDiv {
+				width: 400px;
+				height: 400px;
+				border: 1px solid #666666;
+				clear: left;
+				margin: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--
+	实现拖放第一步
+	1，设置 draggable="ture"
+-->
+		<div class="item" id="item1" draggable="true">
+			<img src="img/mypic.jpg" draggable="true" id="img1"/>
+		</div>
+		<div class="item" id="item2" >
+			<img src="img/mypic.jpg"  id="img2"/>
+		</div>
+		<div class="item" id="item3" draggable="true">
+		   <img src="img/mypic.jpg"  draggable="true" id="img3"/>
+		</div>
+		<div id="targetDiv" draggable="true">
+			<!--html 元素默认不允许拖放
+	img 定义了href属性的a标签除外
+-->
+		</div>
+		<script>
+		
+			var items = document.getElementsByClassName("item");
+			var targetDiv = document.getElementById("targetDiv")
+			for (var i = 0; i < items.length; i++) {
+				//拖放元素处监听的三个
+				//拖放开始
+				items[i].ondragstart = function(ev) {
+		// dataTransfer 对象用来携带存放书数据  当作当前对象的属性来用
+		// 存放数据的方法 key value
+					ev.dataTransfer.setData("Text", ev.target.id);
+//					ev.dataTransfer.setData("Text", "1111111111");
+					console.log("你被拖动了");					
+				}
+				//拖放中
+				items[i].ondrag = function() {
+					console.log("ondrag");
+				}
+				//拖放结束
+				items[i].ondragend = function() {
+					console.log("ondragend");
+				}				
+			}
+			//在目标元素触发  
+			//一进入就触发
+			targetDiv.ondragenter = function() {
+					console.log("ondragenter")
+				}
+				//在经过目标元素时
+			targetDiv.ondragover = function(ev) {
+//调用当前对象的 preventDefault()方法 可以允许目标元素接受拖放元素
+					ev.preventDefault();
+					console.log("ondragover")
+				}
+				//离开目标元素
+			targetDiv.ondragleave = function() {
+					console.log("ondragleave")
+				}
+				//放置目标元素
+			targetDiv.ondrop = function(ev) {
+	//在目标元素取数据，用getData(前面设置的key值)
+			ev.preventDefault();
+			var data=ev.dataTransfer.getData("Text");
+	//追加就加+=
+//	        ev.target.style.backgroundColor="red"
+//			ev.target.innerHTML+=data;
+			ev.target.appendChild(document.getElementById(data));
+			//回拖
+			ev.dataTransfer.setData("Text", ev.target.id);
+			
+			}		
+//----------------------------------------------------------
+
+			
+/*
+ * 放数据  ondragstart
+ * ev.dataTransfer.setData("Text", ev.target.id);
+ * 取数据   targetDiv.ondrop
+ * var data=ev.dataTransfer.getData("Text");
+ * 两个 ev.preventDefault();
+ * 在 targetDiv.ondrop  targetDiv.ondragover
+ */
+			
+		</script>
+	</body>
+
+</html>

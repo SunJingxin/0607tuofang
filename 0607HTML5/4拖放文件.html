@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<style type="text/css">
+		#targetDiv{
+			width:600px;
+			height: 600px;
+			border:1px solid #666666;
+		}
+	</style>
+	<body>
+	  <div id="targetDiv"></div>
+<script>
+var targetDiv = document.getElementById("targetDiv");
+targetDiv.ondragover=function(ev){
+ev.preventDefault();
+}
+targetDiv.ondrop = function(ev) {
+ev.preventDefault();
+var oFiles = ev.dataTransfer.files;
+for (var i = 0; i < oFiles.length; i++) {
+var reader=new FileReader();
+reader.readAsText(oFiles[i],"utf-8");
+reader.onload=function(){
+var txt=this.result;
+targetDiv.innerHTML=txt;
+}
+}
+}
+</script>
+	</body>
+</html>

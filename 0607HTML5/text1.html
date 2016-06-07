@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>
+			
+		</title>
+		
+	</head>
+	<body>
+		输入： <input type="text" > <input type="text" /> <input type="text" ></br></br> 
+		<button onclick="f8()">变</button></br></br>
+		输出：<input type="text" > <input type="text"/ > <input type="text" ></br></br>
+        <script>
+        function f8() {
+        	 var   inputsEle=document.getElementsByTagName("input");
+	        if(inputsEle[2].value<59&&inputsEle[2].value>=0){
+               inputsEle[3].value=inputsEle[0].value;
+               inputsEle[4].value=inputsEle[1].value;
+               inputsEle[5].value=parseInt(inputsEle[2].value)+1;
+	        }else if(inputsEle[2].value==59){
+	        	inputsEle[5].value=0;
+                  if(inputsEle[1].value<59&&inputsEle[1].value>=0){
+                       inputsEle[4].value=parseInt(inputsEle[1].value)+1;
+                  }else if(inputsEle[1].value==59){
+                      inputsEle[4].value=0;
+                      if(inputsEle[0].value<23){
+                          inputsEle[3].value=parseInt(inputsEle[0].value)+1;
+                      } else if(inputsEle[0].value==23){
+                         inputsEle[3].value=0;
+                      }
+                  }
+	        }
+
+        }
+           
+        </script>
+	</body>
+</html>
